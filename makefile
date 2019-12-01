@@ -10,16 +10,14 @@ clean:
 	rm -rf venv
 
 .PHONY: server
-server: activate
-	echo server
+server:
+	source venv/bin/activate && \
+	$(PY3) server.py $(args)
 
 .PHONY: install
-install: activate
+install: venv
+	source venv/bin/activate && \
 	$(PY3) -m pip install -r requirements.txt
-
-.PHONY: activate
-activate: venv
-	source venv/bin/activate
 
 venv:
 	$(PY3) -m virtualenv venv
