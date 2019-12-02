@@ -3,7 +3,7 @@ SHELL=/bin/bash
 VENV=venv
 PY3=/usr/bin/env python3
 PY3V=source $(VENV)/bin/activate && $(PY3)
-SOURCE_DIR=ecoapi
+SOURCE_DIR=carboff
 
 .PHONY: all
 all: install server
