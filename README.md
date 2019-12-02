@@ -1,14 +1,20 @@
-# Dependencies
+# carboff
+Carbon transparency for the internet! Estimate carbon usage of internet actions.
+
+## Dependencies
 
 * python3
+* pip
 
-# Installation
+## End-user installation
 
-`make install`
+* locally: `pip install -e .`
 
-# Running
+## Development installation
 
-Normally: `make server`
+`make install-dev` to install into virtual environment
 
-FlaskAPI debug mode: `make server args=-D`
+## Running
 
+1. (for development install) `source venv/bin/activate`
+2. `python -m carboff.server`
