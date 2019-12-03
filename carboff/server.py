@@ -21,6 +21,9 @@ def root():
 
 @app.route("/impact/action", methods=["GET"])
 def impact_action():
+    if request is None or not request.is_json:
+        raise Exception("Request is in an invalid state")
+
     data = request.json["data"]
     duration = request.json["duration"]
     location = request.json["location"]
