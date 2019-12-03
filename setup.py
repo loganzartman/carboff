@@ -21,12 +21,12 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        "Flask==1.1.1",
-        "Flask-API==2.0"
+        "Flask==1.1.1"
     ],
     extras_require={
         "dev": [
-            "autopep8==1.4.4"
+            "autopep8>=1.4.4",
+            "pylint>=2.4.4"
         ]
     }
 )
