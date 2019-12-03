@@ -7,20 +7,17 @@ app = Flask(__name__)
 def root():
     return {"hello": "world"}
 
-@app.route("/post/datacenter/json", methods=['POST'])
-def data_center_json():
-    data = request.get_json()['data']
-    return data_center(data)
-
-@app.route("/post/datacenter", methods=['POST'])
-def data_center_form():
-    data = request.form.get('data', type=int)
-    return data_center(data)
-
 # Input: number of bytes processed by a data center
 # Return electricity consumption in KwH
-def data_center(data):
-    if data is None or data < 0:
+@app.route("/post/datacenter", methods=['POST'])
+def data_center():
+    data = None
+    if request.is_json:
+        data = request.get_json()['data']
+    else:
+        data = request.form.get('data', type=int)
+
+    if type(data) is not int or data < 0:
         return "Error"
 
     return {"result": 7.2e-11 * data}
