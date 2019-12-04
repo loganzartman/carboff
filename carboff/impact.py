@@ -1,6 +1,9 @@
 estimates = {
     "carbon_intensity_factor": {
-        "default": 519
+        "default": 519,
+        "us": 493,
+        "cn": 681,
+        "fr": 35
     },
     "kWh_per_byte": {
         "data_center": 7.20e-11,
@@ -17,7 +20,11 @@ estimates = {
 }
 
 def carbon_intensity_factor(location):
-    return estimates["carbon_intensity_factor"]["default"]
+    data = estimates["carbon_intensity_factor"]
+    if location in data:
+        return data[location]
+    
+    return data["default"]
 
 def kWh_per_byte_network(network_type):
     data = estimates["kWh_per_byte"]["network"]
