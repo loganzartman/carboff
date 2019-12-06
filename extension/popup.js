@@ -1,4 +1,5 @@
-const display = document.getElementById("display");
+const display_gco2 = document.getElementById("display_gco2");
+const display_kwh = document.getElementById("display_kwh");
 
 setInterval(async () => {
     chrome.storage.local.get(["data"], async (result) => {
@@ -17,6 +18,8 @@ setInterval(async () => {
             })
         });
 
-        display.innerText = JSON.stringify(await response.json());
+        let jsonResponse = await response.json();
+        display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2) + " g";
+        display_kwh.innerText = jsonResponse.kWh_total.toFixed(2) + " kWh";
     });
 }, 1000);
