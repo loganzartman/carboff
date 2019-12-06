@@ -1,5 +1,5 @@
 const display_gco2 = document.getElementById("display_gco2");
-const display_kwh = document.getElementById("display_kwh");
+const display_wh = document.getElementById("display_wh");
 const display_debug = document.getElementById("display_debug");
 const display_wave = document.getElementById("display_wave");
 const display_time = document.getElementById("display_time");
@@ -42,7 +42,7 @@ const updateDisplay = () => {
 
         let jsonResponse = await response.json();
         display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2);
-        display_kwh.innerText = jsonResponse.kWh_total.toFixed(2);
+        display_wh.innerText = (jsonResponse.kWh_total * 1000).toFixed(2);
         wave_overlay_text.innerText = jsonResponse.ocean_rise_am.toFixed(2);
 
         const seconds = (result.totalDuration / 1000) % 60;
