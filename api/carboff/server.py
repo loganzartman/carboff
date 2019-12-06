@@ -19,7 +19,7 @@ def main():
 def root():
     return {"hello": "world"}
 
-@app.route("/impact/action", methods=["GET"])
+@app.route("/impact/action", methods=["POST"])
 def impact_action():
     if request is None or not request.is_json:
         raise Exception("Request is in an invalid state")
