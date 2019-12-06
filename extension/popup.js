@@ -1,7 +1,7 @@
 const display = document.getElementById("display");
 
 setInterval(async () => {
-    chrome.storage.sync.get(["data"], async (result) => {
+    chrome.storage.local.get(["data"], async (result) => {
         const response = await fetch("http://localhost:5000/impact/action", {
             method: "POST",
             headers: {

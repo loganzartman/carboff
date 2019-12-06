@@ -1,8 +1,8 @@
 let data = 0;
-chrome.storage.sync.get(["data"], (result) => {data = result;})
+//chrome.storage.local.get(["data"], (result) => {data = result;})
 
 chrome.runtime.onInstalled.addListener(function() {
-    chrome.storage.sync.set({color: '#3aa757'}, function() {
+    chrome.storage.local.set({color: '#3aa757'}, function() {
     });
 });
 
@@ -50,5 +50,5 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 
 // Write the data to chrome.storage once a second
 setInterval(() => {
-    chrome.storage.sync.set({data}, () => {});
+    chrome.storage.local.set({data}, () => {});
 }, 1000);
