@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from flask import Flask, request
+from flask import Flask, request, jsonify
 
 import carboff.impact as impact
 
@@ -15,6 +15,26 @@ def main():
 
     app.run(debug=args.debug, port=args.port)
 
+class InvalidUsage(Exception):
+    status_code = 400
+
+    def __init__(self, message, status_code=None):
+        Exception.__init__(self)
+        self.message = message
+        if status_code is not None:
+            self.status_code = status_code
+
+    def to_dict(self):
+        rv = dict()
+        rv['message'] = self.message
+        return rv
+
+@app.errorhandler(InvalidUsage)
+def handleError(e):
+    response = jsonify(e.to_dict())
+    response.status_code = e.status_code
+    return response
+
 @app.route("/", methods=["GET"])
 def root():
     return {"hello": "world"}
@@ -22,13 +42,16 @@ def root():
 @app.route("/impact/action", methods=["POST"])
 def impact_action():
     if request is None or not request.is_json:
-        raise Exception("Request is in an invalid state")
+        raise InvalidUsage('Request is in an invalid state', status_code=400)
 
-    data = request.json["data"]
-    duration = request.json["duration"]
-    location = request.json["location"]
-    device_type = request.json["device_type"]
-    network_type = request.json["network_type"]
+    try:
+        data = request.json["data"]
+        duration = request.json["duration"]
+        location = request.json["location"]
+        device_type = request.json["device_type"]
+        network_type = request.json["network_type"]
+    except:
+        raise InvalidUsage('Required: data, duration, location, device_type, and network_type', status_code=400)
 
     return impact.action(
         data=data,
