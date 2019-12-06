@@ -52,7 +52,7 @@ const updateDisplay = () => {
     });
 }
 
-setInterval(() => updateDisplay(), 1000);
+setInterval(() => updateDisplay(), 200);
 updateDisplay();
 
 function renderWave(ctx, fillStyle) {
