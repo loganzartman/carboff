@@ -3,14 +3,28 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
-chrome.tabs.onCreated.addListener((tab) => {
-    if (!tab.id)
+const tabsWithDebug = new Set();
+
+chrome.tabs.onUpdated.addListener((tabId) => {
+    if (!tabId)
         return;
-    if (tab.id === chrome.tabs.TAB_ID_NONE)
+    if (tabId === chrome.tabs.TAB_ID_NONE)
         return;
-    console.log(`created tab ${tab.id}`);
+
+    // attach debugger to tab if none present
+    if (!tabsWithDebug.has(tabId)) {
+        chrome.debugger.attach({tabId}, "1.0", () => {
+            if (!chrome.runtime.lastError) {
+                tabsWithDebug.add(tabId);
+                console.log(`successfully attached to ${tabId}`);
+            }
+        });
+    }
 });
 
 chrome.tabs.onRemoved.addListener((tabId) => {
-    console.log(`removed tab ${tabId}`);
+    if (tabsWithDebug.has(tabId)) {
+        tabsWithDebug.delete(tabId);
+        console.log(`removed debugger on ${tabId}`);
+    }
 });
