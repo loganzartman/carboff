@@ -1,0 +1,11 @@
+{
+    "name": "carboff",
+    "version": "1.0",
+    "description": "stop leaving carb-on",
+    "permissions": ["storage"],
+    "background": {
+      "scripts": ["index.js"],
+      "persistent": false
+    },
+    "manifest_version": 2
+}
