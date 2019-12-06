@@ -1,4 +1,5 @@
 let data = 0;
+chrome.storage.sync.get(["data"], (result) => {data = result;})
 
 chrome.runtime.onInstalled.addListener(function() {
     chrome.storage.sync.set({color: '#3aa757'}, function() {
