@@ -4,3 +4,7 @@ chrome.runtime.onInstalled.addListener(function() {
         alert("Installed");
     });
 });
+
+chrome.webRequest.onCompleted.addListener(function(details) {
+    console.log(details);
+});

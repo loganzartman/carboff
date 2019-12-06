@@ -2,10 +2,13 @@
     "name": "carboff",
     "version": "1.0",
     "description": "stop leaving carb-on",
-    "permissions": ["storage"],
+    "permissions": [
+      "storage",
+      "webRequest"
+    ],
     "background": {
       "scripts": ["index.js"],
-      "persistent": false
+      "persistent": true
     },
     "manifest_version": 2
 }
