@@ -1,3 +1,5 @@
+let data = 0;
+
 chrome.runtime.onInstalled.addListener(function() {
     chrome.storage.sync.set({color: '#3aa757'}, function() {
     });
@@ -17,14 +19,30 @@ chrome.tabs.onUpdated.addListener((tabId) => {
             if (!chrome.runtime.lastError) {
                 tabsWithDebug.add(tabId);
                 console.log(`successfully attached to ${tabId}`);
+
+                chrome.debugger.sendCommand({tabId}, "Network.enable");
             }
         });
+
+
     }
 });
+
+/*
+chrome.webRequest.onBeforeRequest.addListener((details) => {
+    // TODO: Monitor sent data
+});
+*/
 
 chrome.tabs.onRemoved.addListener((tabId) => {
     if (tabsWithDebug.has(tabId)) {
         tabsWithDebug.delete(tabId);
         console.log(`removed debugger on ${tabId}`);
+    }
+});
+
+chrome.debugger.onEvent.addListener((source, method, params) => {
+    if (method === "Network.dataReceived") {
+        data += params.encodedDataLength;
     }
 });
