@@ -1,7 +1,8 @@
-let data;
+let data = 0;
+let totalData;
 let totalDuration;
-chrome.storage.local.get(["data", "totalDuration"], (result) => {
-    data = result.data;
+chrome.storage.local.get(["totalData", "totalDuration"], (result) => {
+    totalData = result.totalData || 0;
     totalDuration = result.totalDuration || 0;
 });
 
@@ -53,11 +54,12 @@ chrome.tabs.onRemoved.addListener((tabId) => {
 chrome.debugger.onEvent.addListener((source, method, params) => {
     if (method === "Network.dataReceived") {
         data += params.encodedDataLength;
+        totalData += params.encodedDataLength;
     }
 });
 
 // Write the data to chrome.storage once a second
 setInterval(() => {
     totalDuration += 1000;
-    chrome.storage.local.set({data, totalDuration}, () => {});
+    chrome.storage.local.set({data, totalData, totalDuration}, () => {});
 }, 1000);
