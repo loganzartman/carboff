@@ -1,7 +1,7 @@
 {
     "name": "carboff",
     "version": "1.0",
-    "description": "stop leaving carb-on",
+    "description": "Stop leaving carb-on",
     "permissions": [
       "storage",
       "tabs",
@@ -20,7 +20,8 @@
       "persistent": true
     },
     "browser_action": {
-        "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "Stop leaving carb-on"
     },
     "manifest_version": 2
 }
