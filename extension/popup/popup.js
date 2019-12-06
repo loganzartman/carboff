@@ -33,8 +33,8 @@ setInterval(async () => {
         });
 
         let jsonResponse = await response.json();
-        display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2) + " g";
-        display_kwh.innerText = jsonResponse.kWh_total.toFixed(2) + " kWh";
+        display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2);
+        display_kwh.innerText = jsonResponse.kWh_total.toFixed(2);
         display_debug.innerText = JSON.stringify({
             totalData: result.totalData,
             totalDuration: result.totalDuration,
