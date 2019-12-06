@@ -2,6 +2,7 @@ const display_gco2 = document.getElementById("display_gco2");
 const display_kwh = document.getElementById("display_kwh");
 const display_debug = document.getElementById("display_debug");
 const display_wave = document.getElementById("display_wave");
+const wave_overlay_text = document.getElementById("wave_overlay_text");
 
 (() => {
     display_wave.width = display_wave.parentElement.offsetWidth;
@@ -35,6 +36,7 @@ setInterval(async () => {
         let jsonResponse = await response.json();
         display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2);
         display_kwh.innerText = jsonResponse.kWh_total.toFixed(2);
+        wave_overlay_text.innerText = jsonResponse.ocean_rise_am.toFixed(2);
         display_debug.innerText = JSON.stringify({
             totalData: result.totalData,
             totalDuration: result.totalDuration,

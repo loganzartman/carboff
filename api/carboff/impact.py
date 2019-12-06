@@ -5,6 +5,9 @@ estimates = {
         "cn": 681,
         "fr": 35
     },
+    # https://www.climate.gov/news-features/understanding-climate/climate-change-global-sea-level
+    # https://cdiac.ess-dive.lbl.gov/trends/emis/tre_glob_2014.html
+    "ocean_rise_factor": 9.84e-20,
     "kWh_per_byte": {
         "data_center": 7.20e-11,
         "network": {
@@ -56,7 +59,11 @@ def action(*, duration=0, data=0, location=None, device_type=None, network_type=
     kWh_device = duration * kWh_per_minute(device_type)
     gCO2_device = kWh_device * carbon_intensity_factor(location)
     
+    kWh_total = kWh_data_center + kWh_network + kWh_device
+    gCO2_total = gCO2_data_center + gCO2_network + gCO2_device
+
     return {
-        "kWh_total": kWh_data_center + kWh_network + kWh_device,
-        "gCO2_total": gCO2_data_center + gCO2_network + gCO2_device
+        "kWh_total": kWh_total,
+        "gCO2_total": gCO2_total,
+        "ocean_rise_am": gCO2_total * estimates["ocean_rise_factor"] * 1e18
     }

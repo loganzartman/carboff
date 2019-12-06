@@ -1,4 +1,8 @@
+<!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8">
+    </head>
     <style type="text/css">
         @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
         @import url('https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap');
@@ -8,12 +12,12 @@
 
         .wave-container {
             width: 100%;
-            height: 100px;
+            height: 160px;
 
             position: relative;
         }
 
-        #wave-overlay {
+        .wave-overlay {
             font-family: "Bitter", sans-serif;
             font-weight: 700;
             font-size: 48px !important;
@@ -51,11 +55,18 @@
             align-items: center;
             justify-content: center;
 
-            color: black;
-            font-size: 24px;
             font-family: "Bitter", sans-serif;
-            background: lightgray;
             margin: 0.5em;
+        }
+
+        .gauges-item--light {
+            font-size: 24px;
+            color: black;
+            border-bottom: 0.1em solid gray;
+        }
+
+        .gauges-item--light .gauges-item-label {
+            color: red;
         }
 
         .gauges-item-label {
@@ -70,11 +81,11 @@
     </style>
     <body>
         <div class="gauges">
-            <div class="gauges-item">
+            <div class="gauges-item gauges-item--light">
                 <span id="display_gco2"></span>
                 <span class="gauges-item-label">gCO<sup>2</sup></span>
             </div>
-            <div class="gauges-item">
+            <div class="gauges-item gauges-item--light">
                 <span id="display_kwh"></span>
                 <span class="gauges-item-label">kWh</span>
             </div>
@@ -82,10 +93,15 @@
 
         <div class="wave-container">
             <canvas id="display_wave"></canvas>
-            <div id="wave-overlay">
+            <div class="wave-overlay">
                 <div style="display: inline-flex;">
-                    <i class="material-icons">arrow_upward</i>
-                    3.76nm
+                    <div class="gauges-item">
+                        <div>
+                            <span>▲</span>
+                            <span id="wave_overlay_text"></span>
+                        </div>
+                        <span class="gauges-item-label">attometers</span>
+                    </div>
                 </div>
             </div>
         </div>
