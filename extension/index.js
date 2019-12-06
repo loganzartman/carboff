@@ -2,13 +2,14 @@ let data = 0;
 let totalData;
 let totalDuration;
 
-chrome.runtime.onMessage.addListener((message) => {
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     if (message.clear) {
         data = 0;
         totalData = 0;
         totalDuration = 0;
         chrome.storage.local.clear(() => {});
     }
+    sendResponse({});
 });
 
 chrome.storage.local.get(["totalData", "totalDuration"], (result) => {
