@@ -9,7 +9,7 @@ const display_wave = document.getElementById("display_wave");
     const ctx = display_wave.getContext("2d");
 
     const render = () => {
-        renderWave(ctx, "#526085");
+        renderWave(ctx, "#0E2154");
         requestAnimationFrame(render);
     };
     render();
@@ -65,7 +65,7 @@ function renderWave(ctx, fillStyle) {
             const randomSpeed = (Math.sin(o * 6581265.2397) * 0.5 + 0.5) * speed;
             displacement += Math.sin(x * frequency * (2 ** o) + Date.now() * randomSpeed) * amplitude * 0.5 ** o;
         }
-        ctx.lineTo(x, 0.5 + displacement);
+        ctx.lineTo(x, 0.3 + displacement);
     }
 
     ctx.lineTo(1,1);
