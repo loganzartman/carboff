@@ -15,6 +15,7 @@ def main():
 
     app.run(debug=args.debug, port=args.port)
 
+# Custom Exception used for returning meaningful messages to API requests
 class InvalidUsage(Exception):
     status_code = 400
 
@@ -29,8 +30,10 @@ class InvalidUsage(Exception):
         rv['message'] = self.message
         return rv
 
+# Handler for InvalidUsage exceptions
 @app.errorhandler(InvalidUsage)
 def handleError(e):
+    # Parse error and send it to the user in a response
     response = jsonify(e.to_dict())
     response.status_code = e.status_code
     return response
@@ -39,6 +42,8 @@ def handleError(e):
 def root():
     return {"hello": "world"}
 
+# Receives POST requests containing data usage metrics
+# Returns the user's impact on the environment
 @app.route("/impact/action", methods=["POST"])
 def impact_action():
     if request is None or not request.is_json:
@@ -50,7 +55,7 @@ def impact_action():
         location = request.json["location"]
         device_type = request.json["device_type"]
         network_type = request.json["network_type"]
-    except:
+    except: # The proper fields were not provided in the request
         raise InvalidUsage('Required: data, duration, location, device_type, and network_type', status_code=400)
 
     return impact.action(

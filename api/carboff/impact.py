@@ -19,6 +19,7 @@ estimates = {
     }
 }
 
+# Different locations have different carbon intensities
 def carbon_intensity_factor(location):
     data = estimates["carbon_intensity_factor"]
     if location in data:
@@ -26,6 +27,7 @@ def carbon_intensity_factor(location):
     
     return data["default"]
 
+# Different network types use different amounts of electricity when sending a byte
 def kWh_per_byte_network(network_type):
     data = estimates["kWh_per_byte"]["network"]
     if network_type in data:
@@ -34,6 +36,7 @@ def kWh_per_byte_network(network_type):
     # By default, return wireless
     return data["wireless"]
 
+# Different devices consume electricity at different rates
 def kWh_per_minute(device_type):
     data = estimates["kWh_per_minute"]
     if device_type in data:
@@ -42,6 +45,7 @@ def kWh_per_minute(device_type):
     # By default, return laptop
     return data["laptop"]
 
+# Given all the data as parameter, do the calculations here
 def action(*, duration=0, data=0, location=None, device_type=None, network_type=None):
     kWh_data_center = data * estimates["kWh_per_byte"]["data_center"]
     gCO2_data_center = kWh_data_center * carbon_intensity_factor(None)
