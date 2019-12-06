@@ -4,7 +4,8 @@
     "description": "stop leaving carb-on",
     "permissions": [
       "storage",
-      "webRequest"
+      "webRequest",
+      "<all_urls>"
     ],
     "background": {
       "scripts": ["index.js"],
