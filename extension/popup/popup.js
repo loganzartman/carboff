@@ -16,7 +16,7 @@ const wave_overlay_text = document.getElementById("wave_overlay_text");
     render();
 })();
 
-setInterval(async () => {
+const updateDisplay = () => {
     chrome.storage.local.get(["data", "totalData", "totalDuration", "pageStartTime"], async (result) => {
         const response = await fetch("http://localhost:5000/impact/action", {
             method: "POST",
@@ -43,7 +43,10 @@ setInterval(async () => {
             pageTime: Date.now() - result.pageStartTime
         });
     });
-}, 1000);
+}
+
+setInterval(() => updateDisplay(), 1000);
+updateDisplay();
 
 function renderWave(ctx, fillStyle) {
     const nPoints = 100;
