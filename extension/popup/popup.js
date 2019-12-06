@@ -24,7 +24,7 @@ setInterval(async () => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                duration: 0,
+                duration: result.totalDuration / 1000,
                 data: result.data,
                 location: "us",
                 device_type: "laptop",
