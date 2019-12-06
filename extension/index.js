@@ -58,5 +58,6 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
 
 // Write the data to chrome.storage once a second
 setInterval(() => {
+    totalDuration += 1000;
     chrome.storage.local.set({data, totalDuration}, () => {});
 }, 1000);
