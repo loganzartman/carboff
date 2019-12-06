@@ -5,10 +5,9 @@
     </head>
     <style type="text/css">
         @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
-        @import url('https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap');
+        @import url('https://fonts.googleapis.com/css?family=Bitter:400,700|Roboto:600&display=swap');
         body {
             width: 400px;
-            margin-top: 2em;
         }
 
         .wave-container {
@@ -84,6 +83,18 @@
             font-weight: 400;
         }
 
+        .title {
+            text-align: left;
+            font-family: "Roboto", sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 2em;
+        }
+
+        .clear-btn {
+            float: right;
+        }
+
         #display_wave {
             position: absolute;
             left: 0;
@@ -91,6 +102,10 @@
         }
     </style>
     <body>
+        <div class="title">
+            <span style="color: black">carb</span><span style="color: #4ba173">off</span>
+            <span id="clear_btn" class="clear-btn">🗑️</span>
+        </div>
         <div class="section-text">impact so far:</div>
         <div class="gauges" style="margin-bottom: 2em;">
             <div class="gauges-item gauges-item--light">

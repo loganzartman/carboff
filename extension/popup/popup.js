@@ -5,6 +5,12 @@ const display_wave = document.getElementById("display_wave");
 const display_time = document.getElementById("display_time");
 const wave_overlay_text = document.getElementById("wave_overlay_text");
 
+document.getElementById("clear_btn").addEventListener("click", (event) => {
+    chrome.runtime.sendMessage({clear: true}, () => {
+        alert("Reset stats!");
+    })
+}, false);
+
 (() => {
     display_wave.width = display_wave.parentElement.offsetWidth;
     display_wave.height = display_wave.parentElement.offsetHeight;
