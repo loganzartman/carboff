@@ -3,7 +3,14 @@ chrome.runtime.onInstalled.addListener(function() {
     });
 });
 
-chrome.webRequest.onCompleted.addListener(function(details) {
-    console.log(details);
-},
-{urls: ["<all_urls>"]});
+chrome.tabs.onCreated.addListener((tab) => {
+    if (!tab.id)
+        return;
+    if (tab.id === chrome.tabs.TAB_ID_NONE)
+        return;
+    console.log(`created tab ${tab.id}`);
+});
+
+chrome.tabs.onRemoved.addListener((tabId) => {
+    console.log(`removed tab ${tabId}`);
+});
