@@ -46,3 +46,8 @@ chrome.debugger.onEvent.addListener((source, method, params) => {
         data += params.encodedDataLength;
     }
 });
+
+// Write the data to chrome.storage once a second
+setInterval(() => {
+    chrome.storage.sync.set({data}, () => {});
+}, 1000);
