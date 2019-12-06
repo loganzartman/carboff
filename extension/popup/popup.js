@@ -2,6 +2,7 @@ const display_gco2 = document.getElementById("display_gco2");
 const display_kwh = document.getElementById("display_kwh");
 const display_debug = document.getElementById("display_debug");
 const display_wave = document.getElementById("display_wave");
+const display_time = document.getElementById("display_time");
 const wave_overlay_text = document.getElementById("wave_overlay_text");
 
 (() => {
@@ -37,11 +38,11 @@ const updateDisplay = () => {
         display_gco2.innerText = jsonResponse.gCO2_total.toFixed(2);
         display_kwh.innerText = jsonResponse.kWh_total.toFixed(2);
         wave_overlay_text.innerText = jsonResponse.ocean_rise_am.toFixed(2);
-        display_debug.innerText = JSON.stringify({
-            totalData: result.totalData,
-            totalDuration: result.totalDuration,
-            pageTime: Date.now() - result.pageStartTime
-        });
+
+        const seconds = (result.totalDuration / 1000) % 60;
+        const minutes = (result.totalDuration / (1000 * 60)) % 60;
+        const hours = (result.totalDuration / (1000 * 60 * 60));
+        display_time.innerText = `${(~~hours).toString().padStart(2, "0")}:${(~~minutes).toString().padStart(2, "0")}:${(~~seconds).toString().padStart(2, "0")}`;
     });
 }
 

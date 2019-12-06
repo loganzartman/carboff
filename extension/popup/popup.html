@@ -8,6 +8,7 @@
         @import url('https://fonts.googleapis.com/css?family=Bitter:400,700&display=swap');
         body {
             width: 400px;
+            margin-top: 2em;
         }
 
         .wave-container {
@@ -61,16 +62,26 @@
 
         .gauges-item--light {
             font-size: 32px;
+            font-weight: 700;
             color: black;
             border-bottom: 0.2em solid gray;
         }
 
         .gauges-item--light .gauges-item-label {
             color: red;
+            font-weight: 400;
         }
 
         .gauges-item-label {
             font-size: 0.5em;
+        }
+
+        .section-text {
+            width: 100%;
+            text-align: center;
+            font-size: 24px;
+            font-family: "Bitter", sans-serif;
+            font-weight: 400;
         }
 
         #display_wave {
@@ -80,6 +91,7 @@
         }
     </style>
     <body>
+        <div class="section-text">impact so far:</div>
         <div class="gauges" style="margin-bottom: 2em;">
             <div class="gauges-item gauges-item--light">
                 <span id="display_gco2"></span>
@@ -89,8 +101,13 @@
                 <span id="display_kwh"></span>
                 <span class="gauges-item-label">kWh</span>
             </div>
+            <div class="gauges-item gauges-item--light">
+                <span id="display_time"></span>
+                <span class="gauges-item-label">browsing time</span>
+            </div>
         </div>
 
+        <div class="section-text">ocean has risen:</div>
         <div class="wave-container">
             <canvas id="display_wave"></canvas>
             <div class="wave-overlay">
@@ -105,9 +122,6 @@
                 </div>
             </div>
         </div>
-
-        <h1>Debug</h1>
-        <h2 id="display_debug"></h2>
 
         <script type="text/javascript" src="popup.js"></script>
     </body>
