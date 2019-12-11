@@ -11,6 +11,11 @@ document.getElementById("clear_btn").addEventListener("click", (event) => {
     })
 }, false);
 
+document.getElementById("tree_btn").addEventListener("click", (event) => {
+    var newWindow = window.open("https://onetreeplanted.org/", '_blank');
+    newWindow.focus();
+}, false);
+
 (() => {
     display_wave.width = display_wave.parentElement.offsetWidth;
     display_wave.height = display_wave.parentElement.offsetHeight;
