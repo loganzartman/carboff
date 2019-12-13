@@ -2,6 +2,7 @@
 Carbon transparency for the internet! Estimate carbon usage of internet actions.
 
 A full writeup is available in this directory under the name `Writeup.pdf`.
+
 Logan Zartman and Austin Atchley
 
 ## API
