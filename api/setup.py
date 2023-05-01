@@ -21,7 +21,7 @@ setuptools.setup(
     ],
     python_requires='>=3.6',
     install_requires=[
-        "Flask==1.1.1"
+        "Flask==2.3.2"
     ],
     extras_require={
         "dev": [
